@@ -9,8 +9,14 @@
     <div id="root">Open the console to see what happens</div>
 
     <!-- <script src="https://unpkg.com/keyboard-actions@latest"></script> -->
-    <script src="./lib.js"></script>
+    <script src="./lib-v2.js"></script>
     <script>
+      const kb = new KeyboardActions();
+      kb.start();
+      kb.addKeyAction("Space", () => console.log("you clicked space"));
+      kb.addKeyAction(["Control", "l"], () => console.log("you clicked combined button"));
+    </script>
+    <!-- <script>
       console.log("start");
       const kb = new KeyboardActions();
 
@@ -32,6 +38,6 @@
 
       kb.stop();
       kb.start();
-    </script>
+    </script> -->
   </body>
 </html>
