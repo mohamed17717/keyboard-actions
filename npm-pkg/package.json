@@ -1,0 +1,14 @@
+{
+  "name": "keyboard-actions",
+  "version": "1.0.7",
+  "description": "Small package, that allow you to assign actions to keyboard buttons. to make user's experience alot easier and better 🎉",
+  "author": "Mhmd",
+  "main": "index.js",
+  "keywords": [
+    "keyboard",
+    "accessibility",
+    "user-experience",
+    "ux"
+  ],
+  "license": "ISC"
+}
