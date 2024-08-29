@@ -13,8 +13,9 @@
     <script>
       const kb = new KeyboardActions();
       kb.start();
-      kb.addKeyAction("Space", () => console.log("you clicked space"));
-      kb.addKeyAction(["Control", "l"], () => console.log("you clicked combined button"));
+      kb.addKeyAction(" ", () => console.log("you clicked space"));
+      kb.addKeyAction(["Control", " "], () => console.log("you clicked combined button"));
+      kb.addKeyAction("Control + s", () => console.log("you zoomed in"));
     </script>
     <!-- <script>
       console.log("start");
