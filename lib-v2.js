@@ -2,6 +2,7 @@ class Type {
   static objectWithDefaultValue(defaultGenerator) {
     let handler = {
       get: function(target, name) {
+        name = name.toLowerCase(); // tolerant for case sensitivity
         if (target.hasOwnProperty(name) ) {
           return target[name];
         } else {
@@ -45,7 +46,7 @@ class KeyboardActionsConfig {
   element = document;
 
   logKeys = true;
-  keepDefault = false;
+  keepDefault = true;
   isAutoKeyOrdering = true;
 
   preActionHook = () => {};
@@ -123,16 +124,20 @@ class ClickManager {
   }
 
   getKeyName(key) {
-    const ALIAS = { " ": "Space" };
+    const ALIAS = { " ": "Space", "+": "Plus", "-": "Minus" };
     let keyName;
+
+    if (typeof key == 'string' && key.includes('+'))
+      key = key.split('+').map(k => k.trim())
 
     if (typeof key == 'string')
       keyName = ALIAS[key] || key;
-    else if (Array.isArray(key)) 
+    else if (Array.isArray(key)){
+      key = key.map(k => this.getKeyName(k));
       keyName = this.getCombinedKeysName(key);
+    }
     else
       throw new Error('invalid key type');
-
     return keyName;
   }
 
@@ -163,7 +168,6 @@ class KeyboardActions {
     this.clickManager = new ClickManager(this.config);
     this.eventsManager = new EventsManager(this.config);
 
-    // this.events = []; // use to start / stop
     this.isRunning = false; // to avoid multiple start / stop
   }
 
