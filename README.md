@@ -1,6 +1,6 @@
 # KeyboardActions
 
-**KeyboardActions** is a lightweight JavaScript utility that allows you to easily define custom keyboard shortcuts and manage key events in your web applications. With features like customizable key combinations, action hooks, and event management, this package provides a flexible way to handle keyboard interactions.
+**KeyboardActions** is a lightweight JavaScript utility that allows you to easily define custom keyboard shortcuts and manage key events in your web applications. With features like customizable key combinations, and action hooks, this package provides a flexible way to handle keyboard interactions.
 
 ## Installation
 
@@ -30,6 +30,19 @@ const KeyboardActions = require('keyboard-actions');
 const keyboardActions = new KeyboardActions();
 ```
 
+> **OR**
+
+```HTML
+<!-- Load the script -->
+<script src="https://unpkg.com/keyboard-actions@latest"></script>
+
+<script>
+// start using it
+const keyboardActions = new KeyboardActions();
+
+</script>
+```
+
 ### Starting and Stopping the Keyboard Listener
 
 You can start listening to key events by calling the `start` method. To stop listening, use the `stop` method.
@@ -37,11 +50,23 @@ You can start listening to key events by calling the `start` method. To stop lis
 ```javascript
 keyboardActions.start(); // Begin listening for key events
 keyboardActions.stop();  // Stop listening for key events
+
+// to read the running status
+console.log(keyboardActions.isRunning);
 ```
 
 ### Adding a Key Action
 
 To add a custom action for a specific key or key combination, use the `addKeyAction` method:
+
+Defining key action can be in this ways
+
+- Array -> `["Control" + "S"]`
+- String -> `"Control + S"`
+
+Also Keys are not case sensitive, its tolerance with upper and lower cases, but make sure to write the right name
+
+NOTE: you can not the name by just turn on the `Logging`
 
 ```javascript
 keyboardActions.addKeyAction('Control + S', (event) => {
@@ -76,7 +101,7 @@ The `KeyboardActionsConfig` class provides several options to customize the beha
 const config = {
   element: document,           // The DOM element to attach the event listeners to
   logKeys: true,               // Whether to log key combinations to the console
-  keepDefault: false,          // Prevent default browser behavior for key events
+  keepDefault: true,          // Prevent default browser behavior for key events
   isAutoKeyOrdering: true,     // Automatically order key combinations
   preActionHook: () => {},     // Function to run before each key action
   postActionHook: () => {},    // Function to run after each key action
@@ -96,22 +121,6 @@ keyboardActions.config.preActionHook = () => {
 keyboardActions.config.postActionHook = () => {
   console.log('Action executed!');
 };
-```
-
-### Managing Window Events
-
-The `Utils.onWindowChange` method can be used to attach a callback function that runs when the window's focus changes:
-
-```javascript
-const Utils = require('keyboard-actions').Utils;
-
-Utils.onWindowChange((event) => {
-  if (event.type === 'blur') {
-    console.log('Window lost focus');
-  } else if (event.type === 'focus') {
-    console.log('Window gained focus');
-  }
-});
 ```
 
 ### Example: Implementing a Simple Shortcut
@@ -153,23 +162,6 @@ keyboardActions.addKeyAction('N + Control', () => {
 });
 
 keyboardActions.start();
-```
-
-### Example: Managing Event Listeners
-
-The `EventsManager` class allows you to easily add and remove event listeners:
-
-```javascript
-const EventsManager = require('keyboard-actions').EventsManager;
-
-const eventsManager = new EventsManager({ element: document });
-
-// Add custom event listeners
-eventsManager.addEventListener('click', () => console.log('Document clicked'));
-eventsManager.addEventListener('keydown', () => console.log('Key down'));
-
-// Remove all event listeners
-eventsManager.remove();
 ```
 
 ## Contributing
