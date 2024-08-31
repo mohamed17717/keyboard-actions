@@ -8,8 +8,8 @@
   <body>
     <div id="root">Open the console to see what happens</div>
 
-    <!-- <script src="https://unpkg.com/keyboard-actions@latest"></script> -->
-    <script src="./lib-v2.js"></script>
+    <script src="https://unpkg.com/keyboard-actions@latest"></script>
+    <!-- <script src="./lib-v2.js"></script> -->
     <script>
       const kb = new KeyboardActions();
       kb.start();
@@ -17,28 +17,5 @@
       kb.addKeyAction(["Control", " "], () => console.log("you clicked combined button"));
       kb.addKeyAction("Control + s", () => console.log("you zoomed in"));
     </script>
-    <!-- <script>
-      console.log("start");
-      const kb = new KeyboardActions();
-
-      kb.showClickedButtonName();
-
-      kb.assignKeyAction("Space", () => console.log("you clicked space"));
-      kb.assignKeyAction("Escape", () => console.log("You trying to exit"));
-      kb.assignKeyAction("Enter", () => console.log("Welcome coach"));
-      kb.assignKeyAction("Enter", () => console.info("what a genius"));
-      kb.updateKeyAction("Enter", () =>
-        console.info("update is equal to assign")
-      );
-      kb.assignKeyAction("Tab", kb.prevent);
-
-      kb.setKeyAction("Enter", () =>
-        console.info("reset the functions list!!!!")
-      );
-      kb.cleanKeyAction("Space");
-
-      kb.stop();
-      kb.start();
-    </script> -->
   </body>
 </html>
